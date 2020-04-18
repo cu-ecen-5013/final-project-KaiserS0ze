@@ -98,11 +98,12 @@ bitbake-layers show-layers | grep "meta-networking" > /dev/null
 layer_networking_info=$?
 
 #bitbake layers needed 
-if [ $layer_info -ne 0 ];then
-	echo "Adding meta-raspberrypi layer"
-	bitbake-layers add-layer ../meta-raspberrypi
+
+if [ $layer_metaoe_info -ne 0 ];then
+    echo "Adding meta-oe layer"
+	bitbake-layers add-layer ../meta-openembedded/meta-oe
 else
-	echo "layer meta-raspberrypi already exists"
+	echo "layer meta-oe already exists"
 fi
 
 
@@ -114,18 +115,18 @@ else
 fi
 
 
-if [ $layer_metaoe_info -ne 0 ];then
-    echo "Adding meta-oe layer"
-	bitbake-layers add-layer ../meta-openembedded/meta-oe
-else
-	echo "layer meta-oe already exists"
-fi
-
 if [ $layer_networking_info -ne 0 ];then
     echo "Adding meta-networking layer"
 	bitbake-layers add-layer ../meta-openembedded/meta-networking
 else
 	echo "layer meta-networking already exists"
+fi
+
+if [ $layer_info -ne 0 ];then
+	echo "Adding meta-raspberrypi layer"
+	bitbake-layers add-layer ../meta-raspberrypi
+else
+	echo "layer meta-raspberrypi already exists"
 fi
 
 set -e
