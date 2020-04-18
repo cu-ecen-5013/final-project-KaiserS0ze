@@ -10,17 +10,17 @@ git submodule update
 source poky/oe-init-build-env
 
 #Set machine as Raspberry Pi 3
-CONFLINE="MACHINE = \" raspberrypi3 \""
+CONFLINE="MACHINE = \"raspberrypi3\""
 #Create image of the type rpi-sdimg
-IMAGE="IMAGE_FSTYPES= \" tar.bz2 ext3 wic.bz2 wic.bmap rpi-sdimg \""
+IMAGE="IMAGE_FSTYPES = \"tar.bz2 ext3 wic.bz2 wic.bmap rpi-sdimg\""
 #Set GPU memory as minimum
-MEMORY="GPU_MEM = \" 16 \""
+MEMORY="GPU_MEM = \"16\""
 #Add any packages needed here
-ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \" opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto \""
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto\""
 #Add wifi support
-DISTRO_F="DISTRO_FEATURES_append = \" bluez5 bluetooth wifi \""
+DISTRO_F="DISTRO_FEATURES_append = \"bluez5 bluetooth wifi\""
 #add firmware support 
-IMAGE_ADD="IMAGE_INSTALL_append = \" linux-firmware-bcm43430 kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables wpa-supplicant \""			      
+IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-bcm43430 kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables wpa-supplicant\""			      
 
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
