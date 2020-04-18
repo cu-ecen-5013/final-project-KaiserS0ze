@@ -31,8 +31,8 @@ local_image_info=$?
 cat conf/local.conf | grep "${MEMORY}" > /dev/null
 local_memory_info=$?
 
-cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
-local_pack_info=$?
+#cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
+#local_pack_info=$?
 
 cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
 local_distro_info=$?
@@ -62,12 +62,12 @@ else
 fi
 
 
-if [ $local_pack_info -ne 0 ];then
-    echo "Append ${ADD_PACK} in the local.conf file"
-	echo ${ADD_PACK} >> conf/local.conf
-else
-	echo "${ADD_PACK} already exists in the local.conf file"
-fi
+#if [ $local_pack_info -ne 0 ];then
+#    echo "Append ${ADD_PACK} in the local.conf file"
+#	echo ${ADD_PACK} >> conf/local.conf
+#else
+#	echo "${ADD_PACK} already exists in the local.conf file"
+#fi
 
 
 if [ $local_distro_info -ne 0 ];then
@@ -106,7 +106,7 @@ else
 fi
 
 
-if [ layer_python_info -ne 0 ];then
+if [ $layer_python_info -ne 0 ];then
     echo "Adding meta-python layer"
 	bitbake-layers add-layer ../meta-openembedded/meta-python
 else
@@ -114,14 +114,14 @@ else
 fi
 
 
-if [ layer_metaoe_info -ne 0 ];then
+if [ $layer_metaoe_info -ne 0 ];then
     echo "Adding meta-oe layer"
 	bitbake-layers add-layer ../meta-openembedded/meta-oe
 else
 	echo "layer meta-oe already exists"
 fi
 
-if [ layer_networking_info -ne 0 ];then
+if [ $layer_networking_info -ne 0 ];then
     echo "Adding meta-networking layer"
 	bitbake-layers add-layer ../meta-openembedded/meta-networking
 else
