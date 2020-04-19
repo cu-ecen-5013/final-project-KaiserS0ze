@@ -16,11 +16,14 @@ IMAGE="IMAGE_FSTYPES = \"tar.bz2 ext3 wic.bz2 wic.bmap rpi-sdimg\""
 #Set GPU memory as minimum
 MEMORY="GPU_MEM = \"16\""
 #Add any packages needed here
-ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto\""
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto mosquitto-clients\""
 #Add wifi support
-DISTRO_F="DISTRO_FEATURES_append = \"bluez5 bluetooth wifi\""
+DISTRO_F="DISTRO_FEATURES_append = \"wifi\""
 #add firmware support 
-IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-bcm43430 kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables wpa-supplicant\""			      
+IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430\""			      
+#linux-firmware-bcm43430
+#wpa-supplicant
+#kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables
 
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
@@ -31,8 +34,8 @@ local_image_info=$?
 cat conf/local.conf | grep "${MEMORY}" > /dev/null
 local_memory_info=$?
 
-#cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
-#local_pack_info=$?
+cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
+local_pack_info=$?
 
 cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
 local_distro_info=$?
@@ -61,14 +64,12 @@ else
 	echo "${MEMORY} already exists in the local.conf file"
 fi
 
-
-#if [ $local_pack_info -ne 0 ];then
-#    echo "Append ${ADD_PACK} in the local.conf file"
-#	echo ${ADD_PACK} >> conf/local.conf
-#else
-#	echo "${ADD_PACK} already exists in the local.conf file"
-#fi
-
+if [ $local_pack_info -ne 0 ];then
+    echo "Append ${ADD_PACK} in the local.conf file"
+	echo ${ADD_PACK} >> conf/local.conf
+else
+	echo "${ADD_PACK} already exists in the local.conf file"
+fi
 
 if [ $local_distro_info -ne 0 ];then
     echo "Append ${DISTRO_F} in the local.conf file"
