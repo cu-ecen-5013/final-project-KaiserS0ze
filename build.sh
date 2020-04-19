@@ -24,6 +24,8 @@ IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430\""
 #linux-firmware-bcm43430
 #wpa-supplicant
 #kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables
+#add camera support
+CAMERA="VIDEO_CAMERA = \"1\""
 
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
@@ -42,6 +44,9 @@ local_distro_info=$?
 
 cat conf/local.conf | grep "${IMAGE_ADD}" > /dev/null
 local_imgadd_info=$?
+
+cat conf/local.conf | grep "${CAMERA}" > /dev/null
+local_cam_info=$?
 
 if [ $local_conf_info -ne 0 ];then
 	echo "Append ${CONFLINE} in the local.conf file"
@@ -83,6 +88,13 @@ if [ $local_imgadd_info -ne 0 ];then
 	echo ${IMAGE_ADD} >> conf/local.conf
 else
 	echo "${IMAGE_ADD} already exists in the local.conf file"
+fi
+
+if [ $local_cam_info -ne 0 ];then
+    echo "Append ${IMAGE_ADD} in the local.conf file"
+	echo ${CAMERA} >> conf/local.conf
+else
+	echo "${CAMERA} already exists in the local.conf file"
 fi
 
 #Check for layers in bb file
