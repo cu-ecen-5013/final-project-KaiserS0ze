@@ -1,4 +1,4 @@
-#Author: Abhijeet Dutt Srivastava
+# Author: Abhijeet Dutt Srivastava
 # Script to build raspberrypi image
 
 #!/bin/sh
@@ -14,18 +14,22 @@ CONFLINE="MACHINE = \"raspberrypi3\""
 #Create image of the type rpi-sdimg
 IMAGE="IMAGE_FSTYPES = \"tar.bz2 ext3 wic.bz2 wic.bmap rpi-sdimg\""
 #Set GPU memory as minimum
-MEMORY="GPU_MEM = \"16\""
+MEMORY="GPU_MEM = \"128\""
 #Add any packages needed here
 ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto mosquitto-clients\""
 #Add wifi support
 DISTRO_F="DISTRO_FEATURES_append = \"wifi\""
 #add firmware support 
-IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430\""			      
+IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430 v4l-utils\""
 #linux-firmware-bcm43430
 #wpa-supplicant
 #kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables
 #add camera support
 CAMERA="VIDEO_CAMERA = \"1\""
+#Licence
+LICENCE="LICENSE_FLAGS_WHITELIST = \"commercial\""
+
+IMAGE_F="IMAGE_FEATURES += \"ssh-server-dropbear\""
 
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
@@ -47,6 +51,12 @@ local_imgadd_info=$?
 
 cat conf/local.conf | grep "${CAMERA}" > /dev/null
 local_cam_info=$?
+
+cat conf/local.conf | grep "${LICENCE}" > /dev/null
+local_licn_info=$?
+
+cat conf/local.conf | grep "${IMAGE_F}" > /dev/null
+local_imgf_info=$?
 
 if [ $local_conf_info -ne 0 ];then
 	echo "Append ${CONFLINE} in the local.conf file"
@@ -91,10 +101,24 @@ else
 fi
 
 if [ $local_cam_info -ne 0 ];then
-    echo "Append ${IMAGE_ADD} in the local.conf file"
+    echo "Append ${CAMERA} in the local.conf file"
 	echo ${CAMERA} >> conf/local.conf
 else
 	echo "${CAMERA} already exists in the local.conf file"
+fi
+
+if [ $local_licn_info -ne 0 ];then
+    echo "Append ${LICENCE} in the local.conf file"
+	echo ${LICENCE} >> conf/local.conf
+else
+	echo "${LICENCE} already exists in the local.conf file"
+fi
+
+if [ $local_imgf_info -ne 0 ];then
+    echo "Append ${IMAGE_F} in the local.conf file"
+	echo ${IMAGE_F} >> conf/local.conf
+else
+	echo "${IMAGE_F} already exists in the local.conf file"
 fi
 
 #Check for layers in bb file
