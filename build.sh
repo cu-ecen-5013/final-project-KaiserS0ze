@@ -134,6 +134,9 @@ layer_metaoe_info=$?
 bitbake-layers show-layers | grep "meta-networking" > /dev/null
 layer_networking_info=$?
 
+bitbake-layers show-layers | grep "meta-camcam" > /dev/null
+layer_camcam_info=$?
+
 #bitbake layers needed 
 
 if [ $layer_metaoe_info -ne 0 ];then
@@ -164,6 +167,13 @@ if [ $layer_info -ne 0 ];then
 	bitbake-layers add-layer ../meta-raspberrypi
 else
 	echo "layer meta-raspberrypi already exists"
+fi
+
+if [ $layer_info -ne 0 ];then
+	echo "Adding meta-camcam layer"
+	bitbake-layers add-layer ../meta-camcam
+else
+	echo "layer meta-camcam already exists"
 fi
 
 set -e
