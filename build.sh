@@ -16,11 +16,11 @@ IMAGE="IMAGE_FSTYPES = \"tar.bz2 ext3 wic.bz2 wic.bmap rpi-sdimg\""
 #Set GPU memory as minimum
 MEMORY="GPU_MEM = \"128\""
 #Add any packages needed here
-ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto mosquitto-clients\""
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto mosquitto-clients python3-paho-mqtt\""
 #Add wifi support
 DISTRO_F="DISTRO_FEATURES_append = \"wifi\""
 #add firmware support 
-IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430 v4l-utils\""
+IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430 v4l-utils python3\""
 #linux-firmware-bcm43430
 #wpa-supplicant
 #kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables
