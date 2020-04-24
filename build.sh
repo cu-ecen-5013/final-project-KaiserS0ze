@@ -20,7 +20,7 @@ ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-high
 #Add wifi support
 DISTRO_F="DISTRO_FEATURES_append = \"wifi\""
 #add firmware support 
-IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430 v4l-utils python3\""
+IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430 v4l-utils python3 cam-mqtt\""
 #linux-firmware-bcm43430
 #wpa-supplicant
 #kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables
