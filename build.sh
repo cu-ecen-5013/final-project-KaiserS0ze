@@ -16,11 +16,11 @@ IMAGE="IMAGE_FSTYPES = \"tar.bz2 ext3 wic.bz2 wic.bmap rpi-sdimg\""
 #Set GPU memory as minimum
 MEMORY="GPU_MEM = \"128\""
 #Add any packages needed here
-ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto mosquitto-clients python3-paho-mqtt libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libpng-dev libwebp-dev\""
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"opencv libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev opencv-dev opencv-apps mosquitto mosquitto-clients python3-paho-mqtt libpng-dev libwebp-dev\""
 #Add wifi support
 DISTRO_F="DISTRO_FEATURES_append = \"wifi\""
 #add firmware support 
-IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430 v4l-utils python3 cam-mqtt python3-numpy\""
+IMAGE_ADD="IMAGE_INSTALL_append = \"linux-firmware-rpidistro-bcm43430 v4l-utils python3 cam-mqtt opencv-app python3-numpy gstreamer1.0-dev python3-matplotlib python3-configargparse python3-pip gcc python3-nose python3-pandas python3-sympy gstreamer1.0-plugins-base cmake\""
 #linux-firmware-bcm43430
 #wpa-supplicant
 #kernel-module-brcmfmac bluez5 i2c-tools bridge-utils hostapd dhcp-server networkmanager iptables
